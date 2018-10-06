@@ -33,15 +33,25 @@ function saveBookmarks(e) {
     // Set to localStorage
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }
-  // local Storage Test
-  //   localStorage.setItem("test", "hello world");
 
-  // to get an Item from the local storage
-  //   console.log(localStorage.getItem("test"));
+  // fetch Bookmarks
+  function fetchBookmarks() {
+    // Get bookmarks from localStorage
+    var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 
-  // to delete from the local storage
-  //   localStorage.removeItem("test");
-  //   console.log(localStorage.getItem("test"));
+    // Get output id
+    var bookmarksResults = document.getElementById("bookmarksResults");
+
+    // Build output
+    bookmarksResults.innerHTML = " ";
+    for (var i = 0; i < bookmarks.length; i++) {
+      var name = bookmarks[i].name;
+      var url = bookmarks[i].url;
+
+      bookmarksResults.innerHTML += name;
+    }
+  }
+
   // Prevent form from submiting
   e.preventDefault();
 }
