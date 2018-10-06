@@ -34,8 +34,31 @@ function saveBookmarks(e) {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }
 
+  // Refetch the bookmarks
+  fetchBookmarks();
+
   // Prevent form from submiting
   e.preventDefault();
+}
+
+// Delete bookmark
+
+function deleteBookmark(url) {
+  // Get bookmark from local storage
+  var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+
+  // loop through bookmarks
+  for (var i = 0; i < bookmarks.length; i++) {
+    if (bookmarks[i].url == url) {
+      // Remove from array
+      bookmarks.splice(i, 1);
+    }
+  }
+  // Re set the localStorage
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+  // Refetch the bookmarks
+  fetchBookmarks();
 }
 
 // fetch Bookmarks
@@ -43,7 +66,7 @@ function fetchBookmarks() {
   // Get bookmarks from localStorage
   var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 
-  console.log(bookmarks);
+  // console.log(bookmarks);
 
   // Get output id
   var bookmarksResults = document.getElementById("bookmarksResults");
